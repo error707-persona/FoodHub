@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebApplication1.Models.OrderFinal>
+
+@{
+    ViewBag.Title = "OrderFinal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+
+<h2>Cart</h2>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @foreach (WebApplication1.Models.OrderFinal details in Model)
+            {<div class="col-sm-4">
+                    <div class="card flex-row flex-wrap">
+                        <div class="card-header border-0" align="center">
+                            <img src="@Url.Content(@details.Image)" class="imageClip" align="middle" onchange="getValue(this)">
+                        </div>
+                        <div class="card-block px-2">
+                            <h4 class="card-title">@details.Foodname</h4>
+                            <p class="card-text">@details.Brandname</p>
+                            <div class="container mt-5" style="width:300px" align="center">
+                                <input type="number" value="0" min="0" max="50" step="1" id="counter" onclick="getValue(this)"/>
+                            </div><br>
+                            <script>
+                                function getValue(obj) {
+        var price = parseInt(@details.Price) * parseInt(obj);
+
+                                    document.getElementById('output').innerHTML = price.toString();
+    }
+                            </script>
+                            <center><input class="form-control" id="blah" type="text" disabled=""></center><br>
+                            <p id="output"></p>
+
+                            <center><a href="#" class="btn btn-primary" align="center">Pay now</a></center>
+                        </div>
+                        
+                        <div class="w-100"></div>
+                        <div class="card-footer w-100 text-muted">
+                            @DateTime.Now
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    <style>
+        .imageClip {
+            width: 300px;
+            height: 175px;
+            overflow: hidden;
+        }
+    </style>
+    <script src="./src/bootstrap-input-spinner.js"></script>
+    <script>
+        $("input[type=number]").inputSpinner()
+    </script>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    <script src="bootstrap-input-spinner.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudfare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>

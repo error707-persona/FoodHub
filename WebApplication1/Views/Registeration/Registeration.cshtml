@@ -1,0 +1,55 @@
+﻿@model WebApplication1.Models.Registeration
+@{
+    ViewBag.Title = "Registeration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Registeration", "Registeration", FormMethod.Post))
+{
+    <form>
+        <fieldset>
+            <legend>Registeration Form</legend>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="email@example.com">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <label for="exampleInputEmail1" class="form-label mt-4">Email address</label><br>
+                    <!--<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">-->
+                    @Html.EditorFor(model => model.email, new { @class = "form-control", placeholder = "Enter email", id = "exampleInputEmail1" })
+                    @Html.ValidationMessageFor(model => model.email)
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <label for="exampleInputPassword1" class="form-label mt-4">Password</label><br>
+                    <!--<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
+                    @Html.EditorFor(model => model.pass, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.pass)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="form-label mt-4">Confirm Password</label><br>
+                <!--<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">-->
+                @Html.EditorFor(model => model.pass, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.pass)
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-floating">
+                <label for="floatingPassword" class="label-success">@ViewBag.SuccessMessage</label>
+            </div>
+        </fieldset>
+    </form>
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+}
+
+
+

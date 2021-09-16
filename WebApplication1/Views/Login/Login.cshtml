@@ -1,0 +1,46 @@
+﻿@model WebApplication1.Models.Login
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Food</h2>
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Registeration</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="form-label mt-4">Login Form</label>
+        <div class="form-floating mb-3">
+
+            <label for="floatingInput">Email address</label><br><br>
+            <!--<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">-->
+            @Html.EditorFor(model => model.email, new { @class = "form-control", @placeholder = "Enter email", id = "exampleInputEmail1" })
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+        <div class="form-floating">
+
+            <label for="floatingPassword">Password</label><br><br>
+            <!--<input type="password" class="form-control" id="floatingPassword" placeholder="Password">-->
+            @Html.EditorFor(model => model.pass, new { @class = "form-control", @placeholder = "Password" })
+            @Html.ValidationMessageFor(model => model.pass)
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-floating">
+            
+            <label for="floatingPassword" class="label-success">@ViewBag.SuccessMessage</label>
+        </div>
+    </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
